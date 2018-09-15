@@ -25,7 +25,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         mRegisterBtn.isEnabled = true
         mRegisterBtn.setOnClickListener {
 
-            mPresenter.register("", "", "")
+            mPresenter.register(mMobileEt.text.toString(), mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
         }
     }
 
