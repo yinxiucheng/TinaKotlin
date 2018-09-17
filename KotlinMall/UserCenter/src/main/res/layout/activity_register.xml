@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/MatchMatch.Vertical.Common">
 
-    <!--<com.kotlin.base.widgets.HeaderBar-->
-        <!--android:id="@+id/mHeaderBar"-->
-        <!--style="@style/MatchWrap"-->
-        <!--app:titleText="注册" />-->
+    <com.tina.base.widgets.HeaderBar
+        android:id="@+id/mHeaderBar"
+        style="@style/MatchWrap"
+        app:titleText="注册"
+        app:rightText="登录"/>
 
     <LinearLayout
         style="@style/MatchWrap.Vertical"

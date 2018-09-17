@@ -8,6 +8,7 @@ import com.tina.base.injection.module.ActivityModule
 import com.tina.base.injection.module.LifecycleProviderModule
 import com.tina.base.presenter.BasePresenter
 import com.tina.base.presenter.view.BaseView
+import com.tina.base.widgets.ProgressLoading
 import javax.inject.Inject
 
 /**
@@ -16,20 +17,26 @@ import javax.inject.Inject
  */
 open abstract class BaseMvpActivity<T:BasePresenter<*>>: BaseActivity(), BaseView {
 
+    @Inject
+    lateinit var mPresenter:T
+
+    lateinit var mActivityComponent:ActivityComponent
+
+    private lateinit var mLoadingDialog:ProgressLoading
+
     override fun showLoading() {
+        mLoadingDialog.showLoading()
     }
 
     override fun hideLoading() {
+        mLoadingDialog.hideLoading()
     }
 
     override fun onError() {
 
     }
 
-    @Inject
-    lateinit var mPresenter:T
 
-    lateinit var mActivityComponent:ActivityComponent
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +44,8 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>: BaseActivity(), BaseVie
 
         initActivityInjection()
         injectComponent()
+
+        mLoadingDialog = ProgressLoading.create(this)
     }
 
     /*

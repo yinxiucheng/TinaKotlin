@@ -2,6 +2,7 @@ package com.tina.user.ui.activity
 
 import android.os.Bundle
 import com.kotlin.user.R
+import com.tina.base.common.AppManager
 import com.tina.base.ext.onClick
 import com.tina.base.ui.activity.BaseMvpActivity
 import com.tina.user.injection.component.DaggerUserComponent
@@ -40,6 +41,18 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         DaggerUserComponent.builder().activityComponent(mActivityComponent)
                 .userModule(UserModule()).build().inject(this)
         mPresenter.mView = this
+    }
+
+    private var pressTime: Long = 0
+
+    override fun onBackPressed() {
+        val time = System.currentTimeMillis()
+        if (time - pressTime > 2000) {
+            toast("再按一次退出程序！")
+            pressTime = time
+        } else {
+            AppManager.instance.exitApp(this)
+        }
     }
 
     /*

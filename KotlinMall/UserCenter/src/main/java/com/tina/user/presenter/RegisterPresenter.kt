@@ -30,11 +30,15 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
         /*
             业务逻辑
          */
+        mView.showLoading()
         userService.register(mobile, verifyCode, pwd)
-                .execute(object : BaseSubscribler<Boolean>() {
+                .execute(object : BaseSubscribler<Boolean>(mView) {
                     override fun onNext(t: Boolean) {
-                        if (t)
-                        mView.onRegisterResult("注册成功")
+                        if (t){
+                            mView.onRegisterResult("注册成功")
+                        }
+                        mView.hideLoading()
+
                     }
                 }, lifecycleProvider)
 
@@ -46,7 +50,7 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
             业务逻辑
          */
         userService.register(mobile, verifyCode, pwd)
-                .execute(object : BaseSubscribler<Boolean>() {
+                .execute(object : BaseSubscribler<Boolean>(mView) {
                     override fun onNext(t: Boolean) {
                         if (t){
 
