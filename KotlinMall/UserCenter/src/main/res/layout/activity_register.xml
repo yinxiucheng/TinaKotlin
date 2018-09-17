@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/MatchMatch.Vertical.Common">
 
-    <!--<com.kotlin.base.widgets.HeaderBar-->
-        <!--android:id="@+id/mHeaderBar"-->
-        <!--style="@style/MatchWrap"-->
-        <!--app:titleText="注册" />-->
+    <com.tina.base.widgets.HeaderBar
+        android:id="@+id/mHeaderBar"
+        style="@style/MatchWrap"
+        app:titleText="注册"
+        app:rightText="登录"/>
 
     <LinearLayout
         style="@style/MatchWrap.Vertical"
@@ -29,12 +30,12 @@
 
             <View style="@style/DividerFixedWidth.MarginTopBottom" />
 
-            <!--<com.kotlin.base.widgets.VerifyButton-->
-                <!--android:id="@+id/mVerifyCodeBtn"-->
-                <!--style="@style/WrapMatch"-->
-                <!--android:background="@null"-->
-                <!--android:text="获取验证码"-->
-                <!--android:textColor="@color/common_blue" />-->
+            <com.tina.base.widgets.VerifyButton
+                android:id="@+id/mVerifyCodeBtn"
+                style="@style/WrapMatch"
+                android:background="@null"
+                android:text="获取验证码"
+                android:textColor="@color/common_blue" />
         </LinearLayout>
 
         <View style="@style/DividerFixedHeight" />
