@@ -1,4 +1,4 @@
-package com.tina.base.net
+package com.tina.base.data.net
 
 import com.tina.base.common.BaseConstant
 import okhttp3.Interceptor
@@ -32,7 +32,7 @@ class RetrofitFactory private constructor() {
             chain.proceed(request)
         }
         retrofit = Retrofit.Builder()
-                .baseUrl(BaseConstant.SERVER_ADRESS)
+                .baseUrl(BaseConstant.SERVER_ADDRESS)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(initOkHttpClient())

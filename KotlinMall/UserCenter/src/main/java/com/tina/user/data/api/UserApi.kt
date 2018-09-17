@@ -1,6 +1,6 @@
 package com.tina.user.data.api
 
-import com.tina.base.net.protocol.BaseResp
+import com.tina.base.data.net.protocol.BaseResp
 import com.tina.user.data.protocol.RegisterReq
 import retrofit2.http.Body
 import retrofit2.http.POST

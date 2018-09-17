@@ -1,4 +1,4 @@
-package com.tina.base.net.protocol
+package com.tina.base.data.net.protocol
 
 /**
  * @author yxc
