@@ -7,5 +7,9 @@ package com.tina.base.common
 class BaseConstant {
     companion object {
         val SERVER_ADDRESS = "http://139.159.161.40:8080/Kotlin_Server/"
+
+        //SP表名
+        const val TABLE_PREFS = "Kotlin_mall"
+
     }
 }

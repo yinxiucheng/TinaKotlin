@@ -14,6 +14,10 @@ buildscript {
 
     ext.rx_lifecycle_version = '1.0'
 
+    ext.android_support_version = "27.+"
+
+    ext.glide_version = "3.7.0"
+
     repositories {
         google()
         jcenter()

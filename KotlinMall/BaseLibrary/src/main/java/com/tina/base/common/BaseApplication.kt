@@ -1,6 +1,7 @@
 package com.tina.base.common
 
 import android.app.Application
+import android.content.Context
 import com.tina.base.injection.component.AppComponent
 import com.tina.base.injection.component.DaggerAppComponent
 import com.tina.base.injection.module.AppModule
@@ -16,12 +17,16 @@ open class BaseApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        toast("")
         initAppInjection()
+        context = this
     }
 
     private fun initAppInjection() {
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+    }
+
+    companion object {
+       lateinit var context:Context
     }
 
 }

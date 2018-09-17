@@ -11,6 +11,7 @@ import com.tina.base.injection.module.ActivityModule
 import com.tina.base.injection.module.LifecycleProviderModule
 import com.tina.base.presenter.BasePresenter
 import com.tina.base.presenter.view.BaseView
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -29,10 +30,9 @@ open abstract class BaseMvpFragment<T:BasePresenter<*>>:BaseFragment(), BaseView
     override fun hideLoading() {
     }
 
-    override fun onError() {
+    override fun onError(erroStr: String) {
+        toast(erroStr)
     }
-
-
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
 

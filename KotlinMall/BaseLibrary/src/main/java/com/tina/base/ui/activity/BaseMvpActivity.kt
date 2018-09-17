@@ -9,6 +9,7 @@ import com.tina.base.injection.module.LifecycleProviderModule
 import com.tina.base.presenter.BasePresenter
 import com.tina.base.presenter.view.BaseView
 import com.tina.base.widgets.ProgressLoading
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -32,12 +33,9 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>: BaseActivity(), BaseVie
         mLoadingDialog.hideLoading()
     }
 
-    override fun onError() {
-
+    override fun onError(erroStr: String) {
+        toast(erroStr)
     }
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
