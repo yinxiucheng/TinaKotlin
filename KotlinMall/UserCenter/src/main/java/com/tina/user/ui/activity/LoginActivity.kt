@@ -22,12 +22,6 @@ import org.jetbrains.anko.toast
 class LoginActivity : BaseMvpActivity<LoginPresenter>(),
         LoginView, View.OnClickListener {
 
-    /**
-     * 登录成功回调
-     */
-    override fun onLoginResult(result: UserInfo) {
-        toast("登录成功")
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,5 +71,15 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(),
                 mPwdEt.text.isNullOrEmpty().not()
 
     }
+
+
+    /**
+     * 登录成功回调
+     */
+    override fun onLoginResult(result: UserInfo) {
+        toast("登录成功")
+        startActivity<UserInfoActivity>()
+    }
+
 
 }
