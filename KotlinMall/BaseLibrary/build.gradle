@@ -77,7 +77,10 @@ dependencies {
     //七牛
     api 'com.qiniu:qiniu-android-sdk:7.3.+'
 
+    //底部导航
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
 
+    //动态权限
     api 'com.github.tbruyelle:rxpermissions:0.10.2'
 
 }
