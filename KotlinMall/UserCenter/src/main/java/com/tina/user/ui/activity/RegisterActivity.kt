@@ -17,9 +17,6 @@ import org.jetbrains.anko.toast
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),
         RegisterView, View.OnClickListener {
 
-    override fun onRegisterResult(result: String) {
-        toast(result)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +71,13 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),
         }
     }
 
+    /*
+    注册回调
+ */
+    override fun onRegisterResult(result: String) {
+        toast(result)
+        finish()
+    }
 
     private fun isBtnEnable(): Boolean {
         return mMobileEt.text.isNullOrEmpty().not() &&
