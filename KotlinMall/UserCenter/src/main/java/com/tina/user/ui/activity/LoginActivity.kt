@@ -14,6 +14,7 @@ import com.tina.user.injection.component.DaggerUserComponent
 import com.tina.user.injection.module.UserModule
 import com.tina.user.presenter.LoginPresenter
 import com.tina.user.presenter.view.LoginView
+import com.tina.user.utils.UserPrefsUtils
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -82,6 +83,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(),
      */
     override fun onLoginResult(result: UserInfo) {
         toast("登录成功")
+        UserPrefsUtils.putUserInfo(result)
         startActivity<UserInfoActivity>()
     }
 

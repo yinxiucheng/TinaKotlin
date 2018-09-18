@@ -1,6 +1,7 @@
 package com.tina.user.presenter.view
 
 import com.tina.base.presenter.view.BaseView
+import com.tina.user.data.protocol.UserInfo
 
 /**
  * @author yxc
@@ -8,6 +9,8 @@ import com.tina.base.presenter.view.BaseView
  */
 interface UserInfoView:BaseView {
 
-    fun onGetUploadTokenResult(resutl:String)
+    fun onGetUploadTokenResult(result:String)
+
+    fun onEditUserResult(result:UserInfo)
 
 }
