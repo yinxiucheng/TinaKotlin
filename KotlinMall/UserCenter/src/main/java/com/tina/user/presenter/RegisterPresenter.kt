@@ -5,12 +5,7 @@ import com.tina.base.presenter.BasePresenter
 import com.tina.base.rx.BaseSubscribler
 import com.tina.user.presenter.view.RegisterView
 import com.tina.user.service.UserService
-import com.tina.user.service.impl.UserServiceImpl
-import retrofit2.http.Field
 import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Qualifier
-import javax.inject.Scope
 
 /**
  * @author yxc
@@ -19,7 +14,6 @@ import javax.inject.Scope
 class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
 
     @Inject
-    @field:[Named("service")]
     lateinit var userService: UserService
 
     fun register(mobile: String, verifyCode: String, pwd: String) {
@@ -39,19 +33,5 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
                     }
                 }, lifecycleProvider)
     }
-
-
-
-//    fun login(mobile: String,pwd: String) {
-//        val userService = UserServiceImpl()
-//        userService.login(mobile, pwd)
-//                .execute(object : BaseSubscribler<Boolean>() {
-//                    override fun onNext(t: Boolean) {
-//                        mView.onLoginResult(true);
-//                    }
-//                }, lifecycleProvider)
-//
-//    }
-
 
 }

@@ -8,4 +8,6 @@ import com.tina.base.presenter.view.BaseView
  */
 interface UserInfoView:BaseView {
 
+    fun onGetUploadTokenResult(resutl:String)
+
 }

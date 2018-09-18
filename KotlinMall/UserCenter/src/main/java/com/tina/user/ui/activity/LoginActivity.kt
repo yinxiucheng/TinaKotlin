@@ -1,7 +1,10 @@
 package com.tina.user.ui.activity
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tina.base.ext.enable
 import com.tina.base.ext.onClick
 import com.tina.base.ui.activity.BaseMvpActivity
@@ -27,6 +30,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         initView()
+        permission()
         injectComponent()
     }
 
@@ -81,5 +85,20 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(),
         startActivity<UserInfoActivity>()
     }
 
-
+    private fun permission() {
+        val rxPermissions = RxPermissions(this)
+        rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .subscribe({ permission ->
+                    if (permission.granted) {
+                        // 用户已经同意该权限
+                        toast("用户已经同意该权限")
+                    } else if (permission.shouldShowRequestPermissionRationale) {
+                        // 用户拒绝了该权限，没有选中『不再询问』（Never ask again）,那么下次再次启动时，还会提示请求权限的对话框
+                        toast("用户拒绝了该权限")
+                    } else {
+                        // 用户拒绝了该权限，并且选中『不再询问』，提醒用户手动打开权限
+                        toast("权限被拒绝，请在设置里面开启相应权限，若无相应权限会影响使用")
+                    }
+                })
+    }
 }

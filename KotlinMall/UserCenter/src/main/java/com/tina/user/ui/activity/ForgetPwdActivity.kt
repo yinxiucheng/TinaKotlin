@@ -28,7 +28,6 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(),
         injectComponent()
     }
 
-
     /*
       初始化视图
    */

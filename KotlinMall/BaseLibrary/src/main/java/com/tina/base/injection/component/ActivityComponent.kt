@@ -16,7 +16,6 @@ import dagger.Component
 @Component(dependencies = arrayOf(AppComponent::class),
         modules = arrayOf(ActivityModule::class, LifecycleProviderModule::class))
 interface ActivityComponent {
-
     fun activity(): Activity
     fun context(): Context
     fun lifecycleProvider(): LifecycleProvider<*>

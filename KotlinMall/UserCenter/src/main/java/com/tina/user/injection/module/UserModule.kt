@@ -4,7 +4,6 @@ import com.tina.user.service.UserService
 import com.tina.user.service.impl.UserServiceImpl
 import dagger.Module
 import dagger.Provides
-import javax.inject.Named
 
 /**
  * @author yxc
@@ -15,16 +14,7 @@ import javax.inject.Named
 class UserModule{
 
     @Provides
-    @Named("service")
     fun providesUserService(service:UserServiceImpl):UserService{
         return  service;
     }
-
-
-    @Provides
-    @Named("service2")
-    fun providesUserService2(service:UserServiceImpl):UserService{
-        return  service;
-    }
-
 }

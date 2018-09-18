@@ -12,4 +12,4 @@ import java.lang.annotation.RetentionPolicy.RUNTIME
 @Scope
 @Documented
 @Retention(RUNTIME)
-annotation class PreComponentScope
+annotation class PerComponentScope

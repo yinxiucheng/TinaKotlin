@@ -14,7 +14,6 @@ import javax.inject.Inject
  */
 class UserServiceImpl @Inject constructor() : UserService {
 
-
     @Inject
     lateinit var repository: UserRepository
 
