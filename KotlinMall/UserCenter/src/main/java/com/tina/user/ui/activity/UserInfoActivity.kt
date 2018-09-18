@@ -104,6 +104,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Tak
     }
 
     override fun takeFail(result: TResult?, msg: String?) {
+
         Log.e("TakePhoto", msg)
     }
 
