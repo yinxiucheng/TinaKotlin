@@ -6,6 +6,7 @@ import com.tina.user.injection.module.UserModule
 import com.tina.user.ui.activity.ForgetPwdActivity
 import com.tina.user.ui.activity.LoginActivity
 import com.tina.user.ui.activity.RegisterActivity
+import com.tina.user.ui.activity.ResetPwdActivity
 import dagger.Component
 
 /**
@@ -19,4 +20,5 @@ interface UserComponent {
     fun inject(activity:RegisterActivity)
     fun inject(activity: LoginActivity)
     fun inject(activity: ForgetPwdActivity)
+    fun inject(activity: ResetPwdActivity)
 }

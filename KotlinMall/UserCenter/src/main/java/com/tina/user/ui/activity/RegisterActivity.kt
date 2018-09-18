@@ -2,11 +2,11 @@ package com.tina.user.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import com.kotlin.user.R
 import com.tina.base.common.AppManager
 import com.tina.base.ext.enable
 import com.tina.base.ext.onClick
 import com.tina.base.ui.activity.BaseMvpActivity
+import com.tina.user.R
 import com.tina.user.injection.component.DaggerUserComponent
 import com.tina.user.injection.module.UserModule
 import com.tina.user.presenter.RegisterPresenter

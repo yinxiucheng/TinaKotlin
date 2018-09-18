@@ -2,15 +2,16 @@ package com.tina.user.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import com.kotlin.user.R
 import com.tina.base.ext.enable
 import com.tina.base.ext.onClick
 import com.tina.base.ui.activity.BaseMvpActivity
+import com.tina.user.R
 import com.tina.user.injection.component.DaggerUserComponent
 import com.tina.user.injection.module.UserModule
 import com.tina.user.presenter.ForgetPwdPresenter
 import com.tina.user.presenter.view.ForgetPwdView
 import kotlinx.android.synthetic.main.activity_forget_pwd.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -62,6 +63,7 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(),
 
     override fun onForgetPwdResult(result: String) {
         toast(result)
+        startActivity<ResetPwdActivity>("mobile" to mMobileEt.text.toString())
     }
 
 
