@@ -11,10 +11,10 @@ import rx.Subscriber
 open class BaseSubscribler<T>(val baseView:BaseView): Subscriber<T>() {
 
     override fun onNext(t: T) {
-        baseView.hideLoading()
     }
 
     override fun onCompleted() {
+        baseView.hideLoading()
     }
 
     override fun onError(e: Throwable?) {

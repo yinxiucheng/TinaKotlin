@@ -2,11 +2,11 @@ package com.tina.user.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import com.kotlin.user.R
 import com.tina.base.common.AppManager
 import com.tina.base.ext.enable
 import com.tina.base.ext.onClick
 import com.tina.base.ui.activity.BaseMvpActivity
+import com.tina.user.R
 import com.tina.user.injection.component.DaggerUserComponent
 import com.tina.user.injection.module.UserModule
 import com.tina.user.presenter.RegisterPresenter
@@ -17,9 +17,6 @@ import org.jetbrains.anko.toast
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),
         RegisterView, View.OnClickListener {
 
-    override fun onRegisterResult(result: String) {
-        toast(result)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +71,13 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),
         }
     }
 
+    /*
+    注册回调
+ */
+    override fun onRegisterResult(result: String) {
+        toast(result)
+        finish()
+    }
 
     private fun isBtnEnable(): Boolean {
         return mMobileEt.text.isNullOrEmpty().not() &&

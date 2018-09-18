@@ -1,10 +1,12 @@
 package com.tina.base.widgets
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.tina.base.R
+import com.tina.base.ext.onClick
 import kotlinx.android.synthetic.main.layout_header_bar.view.*
 
 /**
@@ -43,6 +45,16 @@ class HeaderBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             mRightTv.text = it
             mRightTv.visibility = View.VISIBLE
         }
+
+        mLeftIv.onClick {
+            if (context is Activity){
+                (context as Activity).finish()
+            }
+        }
+    }
+
+    fun getRightView(): View{
+        return mRightTv
     }
 
 }
