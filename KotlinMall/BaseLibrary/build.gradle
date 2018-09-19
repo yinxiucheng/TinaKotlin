@@ -78,9 +78,22 @@ dependencies {
     api 'com.qiniu:qiniu-android-sdk:7.3.+'
 
     //底部导航
-    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
+    api 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
 
     //动态权限
     api 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    //Banner
+    api 'com.youth.banner:banner:1.4.10'  //最新版本
+
+    //标签
+    api 'com.github.shts:TriangleLabelView:1.1.2'
+    //画廊
+    api 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
+
+    //MulitStateView
+    api "com.github.Kennyc1012:MultiStateView:$multi_state_view_version"
+
+
 
 }

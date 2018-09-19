@@ -38,12 +38,12 @@ class ProgressLoading private constructor(context: Context, theme: Int) : Dialog
 
     fun showLoading(){
         super.show()
-        animationDrawable?.start()
+        animationDrawable.start()
     }
 
     fun hideLoading(){
         super.dismiss()
-        animationDrawable?.stop()
+        animationDrawable.stop()
     }
 
 }

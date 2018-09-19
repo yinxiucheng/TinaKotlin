@@ -1,4 +1,4 @@
-package com.tina.kotlinmall
+package com.tina.mall
 
 import org.junit.Test
 

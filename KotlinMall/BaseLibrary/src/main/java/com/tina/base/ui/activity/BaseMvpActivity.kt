@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @author yxc
  * @date 2018/9/15
  */
-open abstract class BaseMvpActivity<T:BasePresenter<*>>: BaseActivity(), BaseView {
+abstract class BaseMvpActivity<T:BasePresenter<*>>: BaseActivity(), BaseView {
 
     @Inject
     lateinit var mPresenter:T
@@ -33,8 +33,8 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>: BaseActivity(), BaseVie
         mLoadingDialog.hideLoading()
     }
 
-    override fun onError(erroStr: String) {
-        toast(erroStr)
+    override fun onError(string: String) {
+        toast(string)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

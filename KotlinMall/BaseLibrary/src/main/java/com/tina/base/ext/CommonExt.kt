@@ -3,10 +3,12 @@ package com.tina.base.ext
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import com.tina.base.data.net.protocol.BaseResp
 import com.tina.base.rx.BaseFunBoolean
 import com.tina.base.rx.BaseFunc
 import com.tina.base.rx.BaseSubscribler
+import com.tina.base.utils.GlideUtils
 import com.tina.base.widgets.DefaultTextWatcher
 import com.trello.rxlifecycle.LifecycleProvider
 import rx.Observable
@@ -61,4 +63,12 @@ fun Button.enable(et: EditText, method: () -> Boolean){
             btn.isEnabled = method()
         }
     })
+}
+
+
+/*
+    ImageView加载网络图片
+ */
+fun ImageView.loadUrl(url: String) {
+    GlideUtils.loadUrlImage(context, url, this)
 }

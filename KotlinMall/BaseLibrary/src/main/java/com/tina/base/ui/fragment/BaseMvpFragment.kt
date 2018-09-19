@@ -11,34 +11,23 @@ import com.tina.base.injection.module.ActivityModule
 import com.tina.base.injection.module.LifecycleProviderModule
 import com.tina.base.presenter.BasePresenter
 import com.tina.base.presenter.view.BaseView
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
  * @author yxc
  * @date 2018/9/17
  */
-open abstract class BaseMvpFragment<T:BasePresenter<*>>:BaseFragment(), BaseView {
+abstract class BaseMvpFragment<T:BasePresenter<*>>:BaseFragment(), BaseView {
     @Inject
     lateinit var mPresenter:T
 
     lateinit var mActivityComponent: ActivityComponent
 
-    override fun showLoading() {
-    }
 
-    override fun hideLoading() {
-    }
-
-    override fun onError(erroStr: String) {
-        toast(erroStr)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         initActivityInjection()
         injectComponent()
-
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -47,14 +36,31 @@ open abstract class BaseMvpFragment<T:BasePresenter<*>>:BaseFragment(), BaseView
     */
     protected abstract fun injectComponent()
 
+
+    override fun showLoading() {
+    }
+
+    override fun hideLoading() {
+    }
+
+    override fun onError(erroStr: String) {
+        toast("")
+    }
+
+    /*
+        初始化Activity级别Component
+     */
+
+
     /*
         初始化Activity级别Component
      */
     private fun initActivityInjection() {
-        mActivityComponent = DaggerActivityComponent.builder().appComponent((activity.application as BaseApplication).appComponent)
-                .activityModule(ActivityModule(activity))
+        mActivityComponent = DaggerActivityComponent.builder()
+                .appComponent((activity?.application as BaseApplication).appComponent)
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
+
     }
 
 

@@ -1,4 +1,4 @@
-package com.tina.kotlinmall
+package com.tina.mall
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
