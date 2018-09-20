@@ -7,6 +7,7 @@ import com.tina.base.common.AppManager
 import com.tina.base.ui.activity.BaseActivity
 import com.tina.mall.R
 import com.tina.mall.ui.fragment.HomeFragment
+import com.tina.mall.ui.fragment.MeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 import java.util.*
@@ -21,6 +22,14 @@ class MainActivity : BaseActivity() {
     private val mStack = Stack<Fragment>()
     //主界面Fragment
     private val mHomeFragment by lazy { HomeFragment() }
+    //主界面Fragment
+    private val mCategoryFragment by lazy { HomeFragment() }
+    //
+    private val mCartFragment by lazy { HomeFragment() }
+    //主界面Fragment
+    private val mMsgFragment by lazy { HomeFragment() }
+    //主界面Fragment
+    private val mMeFragment by lazy { MeFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +37,7 @@ class MainActivity : BaseActivity() {
 
         initFragment()
         initBottomNav()
+        changeFragment(0)
     }
 
     /*
@@ -36,7 +46,17 @@ class MainActivity : BaseActivity() {
     private fun initFragment() {
         var manager = supportFragmentManager.beginTransaction()
         manager.add(R.id.mContaier, mHomeFragment)
+        manager.add(R.id.mContaier, mCategoryFragment)
+        manager.add(R.id.mContaier, mCartFragment)
+        manager.add(R.id.mContaier, mMsgFragment)
+        manager.add(R.id.mContaier, mMeFragment)
         manager.commit()
+
+        mStack.add(mHomeFragment)
+        mStack.add(mCategoryFragment)
+        mStack.add(mCartFragment)
+        mStack.add(mMsgFragment)
+        mStack.add(mMeFragment)
     }
 
     /*
@@ -55,6 +75,7 @@ class MainActivity : BaseActivity() {
             }
         })
         mBottomNavBar.checkMsgBadge(false)
+        mBottomNavBar.checkCartBadge(20)
     }
 
     /*

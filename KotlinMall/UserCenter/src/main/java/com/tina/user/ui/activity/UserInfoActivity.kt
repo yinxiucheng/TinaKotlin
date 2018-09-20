@@ -39,7 +39,6 @@ import java.io.File
 class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, TakePhoto.TakeResultListener {
 
 
-
     private lateinit var mTakePhoto: TakePhoto
 
     private lateinit var mTempFile: File
@@ -50,11 +49,11 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Tak
 
     private var mRemoteFileUrl: String? = null
 
-    private var mUserIcon:String? = null
-    private var mUserName:String? = null
-    private var mUserMobile:String? = null
-    private var mUserGender:String? = null
-    private var mUserSign:String? = null
+    private var mUserIcon: String? = null
+    private var mUserName: String? = null
+    private var mUserMobile: String? = null
+    private var mUserGender: String? = null
+    private var mUserSign: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,16 +74,15 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Tak
         mUserSign = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_SIGN)
 
         mRemoteFileUrl = mUserIcon
-        if (mUserIcon != ""){
-            GlideUtils.loadUrlImage(this,mUserIcon!!,mUserIconIv)
+        if (mUserIcon != "") {
+            GlideUtils.loadUrlImage(this, mUserIcon!!, mUserIconIv)
         }
         mUserNameEt.setText(mUserName)
         mUserMobileTv.text = mUserMobile
 
         if (mUserGender == "0") {
             mGenderMaleRb.isChecked = true
-        }
-        else {
+        } else {
             mGenderFemaleRb.isChecked = true
         }
 
@@ -101,9 +99,9 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Tak
 
         mHeaderBar.getRightView().onClick {
             mPresenter.editUser(mRemoteFileUrl!!,
-                    mUserNameEt.text?.toString()?:"",
-                    if(mGenderMaleRb.isChecked) "0" else "1",
-                    mUserSignEt.text?.toString()?:"")
+                    mUserNameEt.text?.toString() ?: "",
+                    if (mGenderMaleRb.isChecked) "0" else "1",
+                    mUserSignEt.text?.toString() ?: "")
         }
     }
 
