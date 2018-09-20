@@ -1,6 +1,7 @@
 package com.tina.base.injection.module
 
 import android.app.Activity
+import android.support.v4.app.FragmentActivity
 import com.tina.base.injection.ActivityScope
 import dagger.Module
 import dagger.Provides

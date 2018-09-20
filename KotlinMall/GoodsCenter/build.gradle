@@ -1,11 +1,12 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.tina.kotlinmall"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
@@ -14,6 +15,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,19 +23,17 @@ android {
         }
     }
 
-    configurations.all {
-        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
-    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':Provider')
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation project(':Provider')
-    implementation project(':MessageCenter')
-    implementation project(':UserCenter')
-    implementation project(':GoodsCenter')
+    //Dagger2
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
 }

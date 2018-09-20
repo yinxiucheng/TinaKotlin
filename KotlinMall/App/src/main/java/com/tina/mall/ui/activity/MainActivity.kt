@@ -10,6 +10,7 @@ import com.tina.mall.ui.fragment.HomeFragment
 import com.tina.mall.ui.fragment.MeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
+import tina.com.goods.ui.fragment.CategoryFragment
 import java.util.*
 
 /*
@@ -23,7 +24,7 @@ class MainActivity : BaseActivity() {
     //主界面Fragment
     private val mHomeFragment by lazy { HomeFragment() }
     //主界面Fragment
-    private val mCategoryFragment by lazy { HomeFragment() }
+    private val mCategoryFragment by lazy { CategoryFragment() }
     //
     private val mCartFragment by lazy { HomeFragment() }
     //主界面Fragment

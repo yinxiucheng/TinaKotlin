@@ -12,13 +12,13 @@ import org.jetbrains.anko.find
  * @author yxc
  * @date 2018/9/17
  */
-class ProgressLoading private constructor(context: Context, theme: Int) : Dialog(context, theme) {
+class ProgressLoading private constructor(context: Context?, theme: Int) : Dialog(context, theme) {
     companion object {
         private lateinit var mDialog: ProgressLoading
 
         lateinit var animationDrawable: AnimationDrawable
 
-        fun create(context: Context): ProgressLoading{
+        fun create(context: Context?): ProgressLoading{
             mDialog = ProgressLoading(context, R.style.LightProgressDialog)
             mDialog.setContentView(R.layout.progress_dialog)
             mDialog.setCancelable(true)
