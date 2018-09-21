@@ -1,59 +1,104 @@
 package tina.com.goods.ui.activity
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import com.kennyc.view.MultiStateView
-import com.tina.base.ext.startLoading
-import com.tina.base.ui.activity.BaseMvpActivity
-import kotlinx.android.synthetic.main.activity_goods.*
+import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import com.tina.base.ext.onClick
+import com.tina.base.ext.setVisible
+import com.tina.base.ui.activity.BaseActivity
+import com.tina.base.ui.adapter.BaseRecyclerViewAdapter
+import com.tina.base.utils.AppPrefsUtils
+import kotlinx.android.synthetic.main.activity_search_goods.*
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import tina.com.goods.R
-import tina.com.goods.data.protocol.Goods
-import tina.com.goods.injection.component.DaggerGoodsComponent
-import tina.com.goods.injection.module.GoodsModule
-import tina.com.goods.presenter.GoodsListPresenter
-import tina.com.goods.presenter.view.GoodsListView
-import tina.com.goods.ui.adapter.GoodsAdapter
+import tina.com.goods.common.GoodsConstant
+import tina.com.goods.ui.adapter.SearchHistoryAdapter
 
-/**
- * @author yxc
- * @date 2018/9/20
+/*
+    关键字搜索商品页
  */
-class SearchGoodsActivity: BaseMvpActivity<GoodsListPresenter>(), GoodsListView {
-
-    private lateinit var mGoodsAdapter: GoodsAdapter
+class SearchGoodsActivity : BaseActivity(), View.OnClickListener {
+    private lateinit var mAdapter: SearchHistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_goods)
+        setContentView(R.layout.activity_search_goods)
         initView()
+    }
+
+    override fun onStart() {
+        super.onStart()
         loadData()
     }
 
-    fun initView(){
-        mGoodsRv.layoutManager = GridLayoutManager(this, 2)
-        mGoodsAdapter = GoodsAdapter(this)
-        mGoodsRv.adapter = mGoodsAdapter
+    /*
+        初始化视图
+     */
+    private fun initView() {
 
-
-    }
-
-    private fun loadData(){
-        mMultiStateView.startLoading()
-        mPresenter.getGoodsList(intent.getIntExtra("categoryId", 1), 1)
-    }
-
-    override fun onGetGoodsResult(result: MutableList<Goods>?) {
-        if (result != null && result.size > 0) {
-            mGoodsAdapter.setData(result)
-            mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
-        } else {
-            //没有数据
-            mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
+        mLeftIv.onClick(this)
+        mSearchTv.onClick(this)
+        mClearBtn.onClick(this)
+        //RecyclerView适配器
+        mAdapter = SearchHistoryAdapter(this)
+        mSearchHistoryRv.layoutManager = LinearLayoutManager(this)
+        mSearchHistoryRv.adapter = mAdapter
+        //item点击事件
+        mAdapter.mItemClickListener = object : BaseRecyclerViewAdapter.OnItemClickListener<String> {
+            override fun onItemClick(item: String, position: Int) {
+                enterGoodsList(item)
+            }
         }
     }
 
-    override fun injectComponent() {
-        mPresenter.mView = this
+    /*
+        从SP中加载数据
+     */
+    private fun loadData() {
+        val set = AppPrefsUtils.getStringSet(GoodsConstant.SP_SEARCH_HISTORY)
+        mNoDataTv.setVisible(set.isEmpty())
+        mDataView.setVisible(set.isNotEmpty())
+        if (set.isNotEmpty()) {
+            val list = mutableListOf<String>()
+            list.addAll(set)
+            mAdapter.setData(list)
+        }
     }
 
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.mLeftIv -> finish()
+        //执行搜索
+            R.id.mSearchTv -> doSearch()
+        //清除历史记录
+            R.id.mClearBtn -> {
+                AppPrefsUtils.remove(GoodsConstant.SP_SEARCH_HISTORY)
+                loadData()
+            }
+        }
+    }
+
+    //搜索
+    private fun doSearch() {
+        if (mKeywordEt.text.isNullOrEmpty()) {
+            toast("请输入需要搜索的关键字")
+        } else {
+            val inputValue = mKeywordEt.text.toString()
+            AppPrefsUtils.putStringSet(GoodsConstant.SP_SEARCH_HISTORY, mutableSetOf(inputValue))
+            enterGoodsList(inputValue)
+        }
+    }
+
+    /*
+        进入商品列表界面
+     */
+    private fun enterGoodsList(value: String) {
+        //输入不为空，进入商品列表
+        startActivity<GoodsActivity>(
+                GoodsConstant.KEY_SEARCH_GOODS_TYPE to GoodsConstant.SEARCH_GOODS_TYPE_KEYWORD,
+                GoodsConstant.KEY_GOODS_KEYWORD to value
+        )
+
+    }
 }

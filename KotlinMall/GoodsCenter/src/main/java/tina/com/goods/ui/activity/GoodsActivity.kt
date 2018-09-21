@@ -9,6 +9,7 @@ import com.tina.base.ext.startLoading
 import com.tina.base.ui.activity.BaseMvpActivity
 import kotlinx.android.synthetic.main.activity_goods.*
 import tina.com.goods.R
+import tina.com.goods.common.GoodsConstant
 import tina.com.goods.data.protocol.Goods
 import tina.com.goods.injection.component.DaggerGoodsComponent
 import tina.com.goods.injection.module.GoodsModule
@@ -28,7 +29,7 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGAR
     private var mCurrentPage: Int = 1
     private var mMaxPage: Int = 1
 
-    private var mData:MutableList<Goods>? = null
+    private var mData: MutableList<Goods>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +45,7 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGAR
         mGoodsRv.adapter = mGoodsAdapter
     }
 
-    private fun initRefreshLayout(){
+    private fun initRefreshLayout() {
         mRefreshLayout.setDelegate(this)
         var viewHolder = BGANormalRefreshViewHolder(this, true)
         viewHolder.setLoadMoreBackgroundColorRes(R.color.common_bg)
@@ -53,8 +54,13 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGAR
     }
 
     private fun loadData() {
-        mMultiStateView.startLoading()
-        mPresenter.getGoodsList(intent.getIntExtra("categoryId", 1), 1)
+        if (intent.getIntExtra(GoodsConstant.KEY_SEARCH_GOODS_TYPE, 0) != 0) {
+            mMultiStateView.startLoading()
+            mPresenter.getGoodsListByKeyWord(intent.getStringExtra(GoodsConstant.KEY_GOODS_KEYWORD), mCurrentPage)
+        } else {
+            mMultiStateView.startLoading()
+            mPresenter.getGoodsList(intent.getIntExtra("categoryId", 1), mCurrentPage)
+        }
     }
 
     override fun onGetGoodsResult(result: MutableList<Goods>?) {
@@ -62,9 +68,9 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGAR
         mRefreshLayout.endRefreshing()
         if (result != null && result.size > 0) {
             mMaxPage = result[0].maxPage
-            if (mCurrentPage == 1){
+            if (mCurrentPage == 1) {
                 mGoodsAdapter.setData(result)
-            }else{
+            } else {
                 mGoodsAdapter.dataList.addAll(result)
                 mGoodsAdapter.notifyDataSetChanged()
             }

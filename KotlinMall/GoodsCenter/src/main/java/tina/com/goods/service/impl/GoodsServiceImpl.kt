@@ -16,6 +16,10 @@ import javax.inject.Inject
  */
 class GoodsServiceImpl @Inject constructor(): GoodsService {
 
+    override fun getGoodsListByKeyWord(keyWord: String, pageNo: Int): Observable<MutableList<Goods>?> {
+        return repository.getGoodsListByKeyword(keyWord, pageNo).convert()
+    }
+
     override fun getGoodsList(categoryId: Int, pageNo: Int): Observable<MutableList<Goods>?> {
         return repository.getGoodsList(categoryId, pageNo).convert()
     }

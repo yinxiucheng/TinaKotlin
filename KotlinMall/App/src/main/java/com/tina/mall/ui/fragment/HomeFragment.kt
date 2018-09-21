@@ -16,7 +16,9 @@ import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.crosswall.lib.coverflow.CoverFlow
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
+import tina.com.goods.ui.activity.SearchGoodsActivity
 
 /*
     主界面Fragment
@@ -44,7 +46,7 @@ class HomeFragment: BaseFragment() {
     */
     private fun initView() {
         mSearchEt.onClick {
-//            startActivity<SearchGoodsActivity>()
+            startActivity<SearchGoodsActivity>()
         }
 
         mScanIv.onClick {

@@ -24,11 +24,24 @@ class GoodsListPresenter @Inject constructor() : BasePresenter<GoodsListView>() 
         /*
             业务逻辑
          */
-        if (!checkNetWork()){
+        if (!checkNetWork()) {
             return
         }
         mView.showLoading()
         userService.getGoodsList(categoryId, pageNo)
+                .execute(object : BaseSubscribler<MutableList<Goods>?>(mView) {
+                    override fun onNext(t: MutableList<Goods>?) {
+                        mView.onGetGoodsResult(t)
+                    }
+                }, lifecycleProvider)
+    }
+
+    fun getGoodsListByKeyWord(keyword: String, pageNo: Int) {
+        if (!checkNetWork()) {
+            return
+        }
+        mView.showLoading()
+        userService.getGoodsListByKeyWord(keyword, pageNo)
                 .execute(object : BaseSubscribler<MutableList<Goods>?>(mView) {
                     override fun onNext(t: MutableList<Goods>?) {
                         mView.onGetGoodsResult(t)
