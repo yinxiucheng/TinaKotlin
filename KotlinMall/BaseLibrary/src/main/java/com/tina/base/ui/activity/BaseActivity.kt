@@ -18,7 +18,7 @@ open class BaseActivity: RxAppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        AppManager.instance.finishAllActivity()
+        AppManager.instance.finishActivity(this)
     }
 
 

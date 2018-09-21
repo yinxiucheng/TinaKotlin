@@ -7,16 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kennyc.view.MultiStateView
+import com.tina.base.ext.setVisible
+import com.tina.base.ext.startLoading
 import com.tina.base.ui.adapter.BaseRecyclerViewAdapter
-import com.tina.base.ui.fragment.BaseFragment
 import com.tina.base.ui.fragment.BaseMvpFragment
 import kotlinx.android.synthetic.main.fragment_category.*
+import org.jetbrains.anko.support.v4.startActivity
 import tina.com.goods.R
 import tina.com.goods.data.protocol.Category
 import tina.com.goods.injection.component.DaggerCategoryComponent
 import tina.com.goods.injection.module.CategoryModule
 import tina.com.goods.presenter.CategoryPresenter
 import tina.com.goods.presenter.view.CategoryView
+import tina.com.goods.ui.activity.GoodsActivity
 import tina.com.goods.ui.adapter.SecondCategoryAdapter
 import tina.com.goods.ui.adapter.TopCategoryAdapter
 
@@ -26,8 +29,8 @@ import tina.com.goods.ui.adapter.TopCategoryAdapter
  */
 class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
 
-    lateinit var topAdapter:TopCategoryAdapter
-    lateinit var secondAdapter:SecondCategoryAdapter
+    lateinit var topAdapter: TopCategoryAdapter
+    lateinit var secondAdapter: SecondCategoryAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -53,7 +56,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
                 }
                 topAdapter.notifyDataSetChanged()
 
-                mPresenter.getCategory(item.id)
+                loadData(item.id)
             }
         })
 
@@ -63,7 +66,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
         mSecondCategoryRv.adapter = secondAdapter
         secondAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Category> {
             override fun onItemClick(item: Category, position: Int) {
-                TODO()
+                startActivity<GoodsActivity>("categoryId" to item.id)
             }
         })
     }
@@ -76,22 +79,37 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
     }
 
 
+    /*
+       加载数据
+    */
+    private fun loadData(parentId: Int = 0) {
+        if (parentId != 0) {
+            mMultiStateView.startLoading()
+        }
+        mPresenter.getCategory(parentId)
+
+    }
+
+    /*
+        获取商品分类 回调
+     */
     override fun onGetCategoryResult(result: MutableList<Category>?) {
-        result?.let {
+        if (result != null && result.size > 0) {
             if (result[0].parentId == 0) {
                 result[0].isSelected = true
                 topAdapter.setData(result)
                 mPresenter.getCategory(result[0].id)
             } else {
                 secondAdapter.setData(result)
+                mTopCategoryIv.setVisible(true)
+                mCategoryTitleTv.setVisible(true)
                 mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
             }
+        } else {
+            //没有数据
+            mTopCategoryIv.setVisible(false)
+            mCategoryTitleTv.setVisible(false)
+            mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
         }
     }
-
-    fun loadData(parentId: Int = 0) {
-        mPresenter.getCategory(parentId)
-    }
-
-
 }

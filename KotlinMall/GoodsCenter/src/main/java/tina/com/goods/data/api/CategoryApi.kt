@@ -1,11 +1,11 @@
 package tina.com.goods.data.api
 
 import com.tina.base.data.net.protocol.BaseResp
+import com.tina.goods.data.protocol.GetCategoryReq
 import retrofit2.http.Body
 import retrofit2.http.POST
 import rx.Observable
 import tina.com.goods.data.protocol.Category
-import tina.com.goods.data.protocol.GetCategoryReq
 
 /**
  * @author yxc

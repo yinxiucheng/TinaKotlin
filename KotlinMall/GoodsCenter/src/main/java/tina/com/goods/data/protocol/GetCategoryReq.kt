@@ -1,7 +1,6 @@
-package tina.com.goods.data.protocol
+package com.tina.goods.data.protocol
 
-/**
- * @author yxc
- * @date 2018/9/20
+/*
+    获取分类列表请求，parentId为0是一级分类
  */
-class GetCategoryReq(val parentId: Int)
+data class GetCategoryReq (val parentId: Int)

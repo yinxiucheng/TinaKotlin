@@ -2,10 +2,10 @@ package tina.com.goods.data.repository
 
 import com.tina.base.data.net.RetrofitFactory
 import com.tina.base.data.net.protocol.BaseResp
+import com.tina.goods.data.protocol.GetCategoryReq
 import rx.Observable
 import tina.com.goods.data.api.CategoryApi
 import tina.com.goods.data.protocol.Category
-import tina.com.goods.data.protocol.GetCategoryReq
 import javax.inject.Inject
 
 /**

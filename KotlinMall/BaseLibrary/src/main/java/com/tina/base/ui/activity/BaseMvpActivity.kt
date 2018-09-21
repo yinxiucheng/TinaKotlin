@@ -59,7 +59,4 @@ abstract class BaseMvpActivity<T:BasePresenter<*>>: BaseActivity(), BaseView {
                 .build()
     }
 
-
-
-
 }

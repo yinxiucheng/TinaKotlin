@@ -58,14 +58,14 @@ abstract open class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), Base
        显示加载框，默认实现
     */
     override fun showLoading() {
-        mLoadingDialog.showLoading()
+//        mLoadingDialog.showLoading()
     }
 
     /*
         隐藏加载框，默认实现
      */
     override fun hideLoading() {
-        mLoadingDialog.hideLoading()
+//        mLoadingDialog.hideLoading()
     }
 
     /*
