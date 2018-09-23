@@ -7,7 +7,9 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.kennyc.view.MultiStateView
 import com.tina.base.ext.startLoading
 import com.tina.base.ui.activity.BaseMvpActivity
+import com.tina.base.ui.adapter.BaseRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_goods.*
+import org.jetbrains.anko.startActivity
 import tina.com.goods.R
 import tina.com.goods.common.GoodsConstant
 import tina.com.goods.data.protocol.Goods
@@ -43,6 +45,12 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGAR
         mGoodsRv.layoutManager = GridLayoutManager(this, 2)
         mGoodsAdapter = GoodsAdapter(this)
         mGoodsRv.adapter = mGoodsAdapter
+
+        mGoodsAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Goods>{
+            override fun onItemClick(item: Goods, position: Int) {
+                startActivity<GoodsDetailActivity>()
+            }
+        })
     }
 
     private fun initRefreshLayout() {
