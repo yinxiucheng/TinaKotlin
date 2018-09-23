@@ -1,8 +1,11 @@
 package com.tina.base.ui.activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.FrameLayout
 import com.tina.base.common.AppManager
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
+import org.jetbrains.anko.find
 
 /**
  * @author yxc
@@ -20,6 +23,13 @@ open class BaseActivity: RxAppCompatActivity() {
         super.onDestroy()
         AppManager.instance.finishActivity(this)
     }
+
+    //获取Window中视图content
+    val contentView: View
+        get() {
+            val content = find<FrameLayout>(android.R.id.content)
+            return content.getChildAt(0)
+        }
 
 
 }
