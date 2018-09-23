@@ -24,6 +24,10 @@ class GoodsServiceImpl @Inject constructor(): GoodsService {
         return repository.getGoodsList(categoryId, pageNo).convert()
     }
 
+    override fun getGoodsDetail(goodsId: Int): Observable<Goods>{
+        return repository.getGoodsDetail(goodsId).convert()
+    }
+
     @Inject
     lateinit var repository: GoodsRepository
 

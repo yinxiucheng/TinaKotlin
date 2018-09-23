@@ -55,7 +55,7 @@ fun <T> Observable<BaseResp<T>>.convertBoolean():Observable<Boolean>{
 /*
     扩展数据转换
  */
-fun <T> Observable<BaseResp<T>>.convert():Observable<T>{
+fun <T> Observable<BaseResp<T>>.convert(): Observable<T> {
     return this.flatMap(BaseFunc())
 }
 

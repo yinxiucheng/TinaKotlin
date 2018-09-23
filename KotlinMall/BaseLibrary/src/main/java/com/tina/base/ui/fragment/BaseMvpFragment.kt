@@ -19,7 +19,7 @@ import javax.inject.Inject
 /*
     Fragment基类，业务相关
  */
-abstract open class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
+abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
 
     @Inject
     lateinit var mPresenter: T
