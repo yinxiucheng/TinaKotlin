@@ -18,9 +18,11 @@ import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
 import org.jetbrains.anko.support.v4.act
+import org.jetbrains.anko.support.v4.toast
 import tina.com.goods.R
 import tina.com.goods.common.GoodsConstant
 import tina.com.goods.data.protocol.Goods
+import tina.com.goods.event.AddCartEvent
 import tina.com.goods.event.GoodsDetailImageEvent
 import tina.com.goods.event.SkuChangedEvent
 import tina.com.goods.injection.component.DaggerGoodsComponent
@@ -34,13 +36,17 @@ import tina.com.goods.widget.GoodsSkuPopView
  * @author yxc
  * @date 2018/9/20
  */
-class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), GoodsDetailView{
+class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), GoodsDetailView {
+
+
 
     private lateinit var mSkuPop: GoodsSkuPopView
     //SKU弹层出场动画
     private lateinit var mAnimationStart: Animation
     //SKU弹层退场动画
     private lateinit var mAnimationEnd: Animation
+
+    private var mCurGoods: Goods? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -56,7 +62,6 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         loadData()
         initObserve()
     }
-
 
 
     private fun initView() {
@@ -104,7 +109,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
      */
     private fun initSkuPop() {
         mSkuPop = GoodsSkuPopView(act)
-        mSkuPop.setOnDismissListener{
+        mSkuPop.setOnDismissListener {
             (activity as BaseActivity).contentView.startAnimation(mAnimationEnd)
         }
     }
@@ -113,16 +118,16 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     /*
        监听SKU变化及加入购物车事件
     */
-    private fun initObserve(){
+    private fun initObserve() {
         Bus.observe<SkuChangedEvent>()
                 .subscribe {
-                    mSkuSelectedTv.text = mSkuPop.getSelectSku() +GoodsConstant.SKU_SEPARATOR + mSkuPop.getSelectCount()+"件"
+                    mSkuSelectedTv.text = mSkuPop.getSelectSku() + GoodsConstant.SKU_SEPARATOR + mSkuPop.getSelectCount() + "件"
                 }.registerInBus(this)
 
-//        Bus.observe<AddCartEvent>()
-//                .subscribe {
-//                    addCart()
-//                }.registerInBus(this)
+        Bus.observe<AddCartEvent>()
+                .subscribe {
+                    addCart()
+                }.registerInBus(this)
     }
 
     /*
@@ -132,8 +137,21 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         mPresenter.getGoodsDetail(act.intent.getIntExtra(GoodsConstant.KEY_GOODS_ID, -1))
     }
 
+    private fun addCart() {
+        mCurGoods?.let {
+            mPresenter.addCart(it.id,
+                    it.goodsDesc,
+                    it.goodsDefaultIcon,
+                    it.goodsDefaultPrice,
+                    mSkuPop.getSelectCount(),
+                    mSkuPop.getSelectSku())
+        }
+    }
+
 
     override fun onGetGoodsDetailResult(result: Goods) {
+
+        mCurGoods = result
 
         mGoodsDetailBanner.setImages(result.goodsBanner.split(","))
         mGoodsDetailBanner.start()
@@ -157,6 +175,10 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
 
         mSkuPop.setSkuData(result.goodsSku)
 
+    }
+
+    override fun onAddCartResult(result: Int) {
+        toast("Cart ---------- $result")
     }
 
     override fun onDestroy() {

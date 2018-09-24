@@ -3,18 +3,12 @@ package com.tina.user.ui.activity
 import android.Manifest
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.tina.base.common.HOME_BANNER_FOUR
-import com.tina.base.common.HOME_BANNER_ONE
-import com.tina.base.common.HOME_BANNER_THREE
-import com.tina.base.common.HOME_BANNER_TWO
 import com.tina.base.ext.enable
 import com.tina.base.ext.onClick
 import com.tina.base.ui.activity.BaseMvpActivity
-import com.tina.base.utils.GlideUtils
-import com.tina.base.widgets.BannerImageLoader
+import com.tina.provider.router.RouterPath
 import com.tina.user.R
 import com.tina.user.data.protocol.UserInfo
 import com.tina.user.injection.component.DaggerUserComponent
@@ -22,8 +16,6 @@ import com.tina.user.injection.module.UserModule
 import com.tina.user.presenter.LoginPresenter
 import com.tina.user.presenter.view.LoginView
 import com.tina.user.utils.UserPrefsUtils
-import com.youth.banner.BannerConfig
-import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -32,7 +24,7 @@ import org.jetbrains.anko.toast
  * 登录
  *
  */
-@Route(path = "/userCenter/login")
+@Route(path = RouterPath.UserCenter.PATH_LOGIN)
 class LoginActivity : BaseMvpActivity<LoginPresenter>(),
         LoginView, View.OnClickListener {
 

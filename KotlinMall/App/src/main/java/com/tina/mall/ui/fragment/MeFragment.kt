@@ -9,9 +9,10 @@ import com.tina.base.ext.onClick
 import com.tina.base.ui.fragment.BaseFragment
 import com.tina.base.utils.AppPrefsUtils
 import com.tina.mall.R
+import com.tina.mall.ui.activity.SettingActivity
 import com.tina.provider.common.ProviderConstant
+import com.tina.provider.common.afterLogin
 import com.tina.provider.common.isLogined
-import com.tina.user.ui.activity.LoginActivity
 import com.tina.user.ui.activity.UserInfoActivity
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -79,14 +80,46 @@ class MeFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.mUserIconIv, R.id.mUserNameTv -> {
-                if (isLogined()) {
+                afterLogin {
                     startActivity<UserInfoActivity>()
-                } else {
-                    startActivity<LoginActivity>()
                 }
+            }
 
+            R.id.mUserIconIv, R.id.mUserNameTv -> {
+                afterLogin {
+                    startActivity<UserInfoActivity>()
+                }
+            }
+
+//            R.id.mWaitPayOrderTv -> {
+//                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
+//            }
+//            R.id.mWaitConfirmOrderTv -> {
+//                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
+//            }
+//            R.id.mCompleteOrderTv -> {
+//                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
+//            }
+//            R.id.mAllOrderTv -> {
+//                afterLogin {
+//                    startActivity<OrderActivity>()
+//                }
+//            }
+//
+//            R.id.mAddressTv -> {
+//                afterLogin {
+//                    startActivity<ShipAddressActivity>()
+//                }
+//            }
+//            R.id.mShareTv -> {
+//                toast(R.string.coming_soon_tip)
+//            }
+            R.id.mSettingTv -> {
+                startActivity<SettingActivity>()
             }
         }
+
+
     }
 
 

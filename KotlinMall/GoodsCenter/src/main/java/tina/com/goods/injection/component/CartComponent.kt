@@ -14,10 +14,6 @@ import tina.com.goods.ui.fragment.GoodsDetailTabTwoFragment
  */
 @PerComponentScope
 @Component(dependencies = arrayOf(ActivityComponent::class),
-        modules = arrayOf(GoodsModule::class, CartModule::class))
-interface GoodsComponent {
-    fun inject(activity: GoodsActivity)
-    fun inject(fragment: GoodsDetailTabTwoFragment)
-    fun inject(fragment: GoodsDetailTabOneFragment)
-
+        modules = arrayOf(CartModule::class))
+interface CartComponent {
 }
