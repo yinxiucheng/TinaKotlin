@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView
 /*
     RecyclerViewAdapter基类
  */
-abstract class BaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(var mContext: Context) : RecyclerView.Adapter<VH>() {
+abstract class BaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(var mContext: Context?) : RecyclerView.Adapter<VH>() {
 
     //ItemClick事件
     var mItemClickListener: OnItemClickListener<T>? = null

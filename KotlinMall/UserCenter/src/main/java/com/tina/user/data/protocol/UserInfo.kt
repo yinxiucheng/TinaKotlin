@@ -7,7 +7,7 @@ package com.tina.user.data.protocol
  *
  */
 data class UserInfo(val id: String,
-                    val userInfo: String,
+                    val userIcon: String,
                     val userName: String,
                     val userGender:String,
                     val userMobile:String,

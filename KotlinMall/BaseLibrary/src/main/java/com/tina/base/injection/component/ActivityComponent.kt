@@ -13,12 +13,10 @@ import dagger.Component
  * @date 2018/9/16
  */
 @ActivityScope
-@Component(dependencies = arrayOf(AppComponent::class),
-        modules = arrayOf(ActivityModule::class, LifecycleProviderModule::class))
+@Component(dependencies = arrayOf(AppComponent::class),modules = arrayOf(ActivityModule::class,LifecycleProviderModule::class))
 interface ActivityComponent {
 
-    fun activity(): Activity
+    fun activity():Activity
     fun context(): Context
     fun lifecycleProvider(): LifecycleProvider<*>
-
 }

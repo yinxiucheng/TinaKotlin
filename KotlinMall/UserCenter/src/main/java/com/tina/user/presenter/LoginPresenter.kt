@@ -7,7 +7,6 @@ import com.tina.user.data.protocol.UserInfo
 import com.tina.user.presenter.view.LoginView
 import com.tina.user.service.UserService
 import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * @author yxc
@@ -16,7 +15,6 @@ import javax.inject.Named
 class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
 
     @Inject
-    @field:[Named("service")]
     lateinit var userService: UserService
 
     fun login(mobile: String, pwd: String, pushId: String) {
@@ -29,8 +27,8 @@ class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
         mView.showLoading()
         userService.login(mobile,pwd, pushId)
                 .execute(object : BaseSubscribler<UserInfo>(mView) {
-                    override fun onNext(userInfo: UserInfo) {
-                        mView.onLoginResult(userInfo)
+                    override fun onNext(t: UserInfo) {
+                        mView.onLoginResult(t)
                     }
                 }, lifecycleProvider)
     }

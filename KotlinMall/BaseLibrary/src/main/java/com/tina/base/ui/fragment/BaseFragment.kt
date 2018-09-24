@@ -1,6 +1,7 @@
 package com.tina.base.ui.fragment
 
-import com.trello.rxlifecycle.components.RxFragment
+import com.trello.rxlifecycle.components.support.RxFragment
+
 
 /**
  * @author yxc

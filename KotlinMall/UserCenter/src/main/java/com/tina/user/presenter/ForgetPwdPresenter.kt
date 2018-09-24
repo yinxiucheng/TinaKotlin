@@ -6,7 +6,6 @@ import com.tina.base.rx.BaseSubscribler
 import com.tina.user.presenter.view.ForgetPwdView
 import com.tina.user.service.UserService
 import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * @author yxc
@@ -15,7 +14,6 @@ import javax.inject.Named
 class ForgetPwdPresenter @Inject constructor() : BasePresenter<ForgetPwdView>() {
 
     @Inject
-    @field:[Named("service")]
     lateinit var userService: UserService
 
     fun forgetPwd(mobile: String, verifyCode: String) {

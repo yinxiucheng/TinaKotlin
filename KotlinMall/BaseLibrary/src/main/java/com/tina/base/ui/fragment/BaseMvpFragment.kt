@@ -11,54 +11,67 @@ import com.tina.base.injection.module.ActivityModule
 import com.tina.base.injection.module.LifecycleProviderModule
 import com.tina.base.presenter.BasePresenter
 import com.tina.base.presenter.view.BaseView
-import org.jetbrains.anko.toast
+import com.tina.base.widgets.ProgressLoading
+import org.jetbrains.anko.support.v4.act
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
-/**
- * @author yxc
- * @date 2018/9/17
+/*
+    Fragment基类，业务相关
  */
-open abstract class BaseMvpFragment<T:BasePresenter<*>>:BaseFragment(), BaseView {
+abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
+
     @Inject
-    lateinit var mPresenter:T
+    lateinit var mPresenter: T
 
     lateinit var mActivityComponent: ActivityComponent
 
-    override fun showLoading() {
-    }
+    private lateinit var mLoadingDialog: ProgressLoading
 
-    override fun hideLoading() {
-    }
-
-    override fun onError(erroStr: String) {
-        toast(erroStr)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         initActivityInjection()
         injectComponent()
 
+        //初始加载框
+        mLoadingDialog = ProgressLoading.create(context)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     /*
-       Dagger注册
-    */
+        Dagger注册
+     */
     protected abstract fun injectComponent()
 
     /*
         初始化Activity级别Component
      */
     private fun initActivityInjection() {
-        mActivityComponent = DaggerActivityComponent.builder().appComponent((activity.application as BaseApplication).appComponent)
-                .activityModule(ActivityModule(activity))
+        mActivityComponent = DaggerActivityComponent.builder().
+                appComponent((act.application as BaseApplication).appComponent)
+                .activityModule(ActivityModule(act))
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
+
     }
 
+    /*
+       显示加载框，默认实现
+    */
+    override fun showLoading() {
+//        mLoadingDialog.showLoading()
+    }
 
+    /*
+        隐藏加载框，默认实现
+     */
+    override fun hideLoading() {
+//        mLoadingDialog.hideLoading()
+    }
 
-
-
+    /*
+        错误信息提示，默认实现
+     */
+    override fun onError(text:String) {
+        toast(text)
+    }
 }
