@@ -2,6 +2,8 @@ package tina.com.goods.ui.activity
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import com.alibaba.android.arouter.launcher.ARouter
+import com.tina.base.ext.onClick
 import com.tina.base.ui.activity.BaseActivity
 import kotlinx.android.synthetic.main.activity_goods_detail.*
 import tina.com.goods.R
@@ -26,6 +28,10 @@ class GoodsDetailActivity: BaseActivity(){
         mGoodsDetailVp.adapter = GoodsDetailVpAdapter(supportFragmentManager, this)
 
         mGoodsDetailTab.setupWithViewPager(mGoodsDetailVp)
+
+        mAddCartBtn.onClick{
+            ARouter.getInstance().build("/userCenter/login").navigation()
+        }
     }
 
 

@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tina.base.common.HOME_BANNER_FOUR
 import com.tina.base.common.HOME_BANNER_ONE
@@ -31,6 +32,7 @@ import org.jetbrains.anko.toast
  * 登录
  *
  */
+@Route(path = "/userCenter/login")
 class LoginActivity : BaseMvpActivity<LoginPresenter>(),
         LoginView, View.OnClickListener {
 

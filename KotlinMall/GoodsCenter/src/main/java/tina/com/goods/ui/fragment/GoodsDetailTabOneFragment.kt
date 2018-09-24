@@ -21,7 +21,6 @@ import org.jetbrains.anko.support.v4.act
 import tina.com.goods.R
 import tina.com.goods.common.GoodsConstant
 import tina.com.goods.data.protocol.Goods
-import tina.com.goods.event.AddCartEvent
 import tina.com.goods.event.GoodsDetailImageEvent
 import tina.com.goods.event.SkuChangedEvent
 import tina.com.goods.injection.component.DaggerGoodsComponent

@@ -2,10 +2,10 @@ package com.tina.base.common
 
 import android.app.Application
 import android.content.Context
+import com.alibaba.android.arouter.launcher.ARouter
 import com.tina.base.injection.component.AppComponent
 import com.tina.base.injection.component.DaggerAppComponent
 import com.tina.base.injection.module.AppModule
-import org.jetbrains.anko.toast
 
 /**
  * @author yxc
@@ -19,6 +19,10 @@ open class BaseApplication: Application() {
         super.onCreate()
         initAppInjection()
         context = this
+
+        ARouter.openLog()
+        ARouter.openDebug()
+        ARouter.init(this)
     }
 
     private fun initAppInjection() {
