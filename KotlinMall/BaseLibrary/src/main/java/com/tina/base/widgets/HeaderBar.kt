@@ -5,6 +5,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import com.tina.base.R
 import com.tina.base.ext.onClick
 import kotlinx.android.synthetic.main.layout_header_bar.view.*
@@ -53,7 +55,24 @@ class HeaderBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         }
     }
 
-    fun getRightView(): View{
+    /*
+       获取左侧视图
+    */
+    fun getLeftView(): ImageView {
+        return mLeftIv
+    }
+
+    /*
+        获取右侧文字
+     */
+    fun getRightText():String{
+        return mRightTv.text.toString()
+    }
+
+    /*
+       获取右侧视图
+    */
+    fun getRightView():TextView{
         return mRightTv
     }
 

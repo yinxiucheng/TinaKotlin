@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 import tina.com.goods.common.GoodsConstant
 import tina.com.goods.event.UpdateCartEvent
+import tina.com.goods.ui.fragment.CartFragment
 import tina.com.goods.ui.fragment.CategoryFragment
 import java.util.*
 
@@ -28,10 +29,10 @@ class MainActivity : BaseActivity() {
     private val mStack = Stack<Fragment>()
     //主界面Fragment
     private val mHomeFragment by lazy { HomeFragment() }
-    //主界面Fragment
+    //商品分类
     private val mCategoryFragment by lazy { CategoryFragment() }
-    //
-    private val mCartFragment by lazy { HomeFragment() }
+    //购物车
+    private val mCartFragment by lazy { CartFragment() }
     //主界面Fragment
     private val mMsgFragment by lazy { HomeFragment() }
     //主界面Fragment

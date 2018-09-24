@@ -6,6 +6,7 @@ import dagger.Component
 import tina.com.goods.injection.module.CartModule
 import tina.com.goods.injection.module.GoodsModule
 import tina.com.goods.ui.activity.GoodsActivity
+import tina.com.goods.ui.fragment.CartFragment
 import tina.com.goods.ui.fragment.GoodsDetailTabOneFragment
 import tina.com.goods.ui.fragment.GoodsDetailTabTwoFragment
 
@@ -16,4 +17,5 @@ import tina.com.goods.ui.fragment.GoodsDetailTabTwoFragment
 @Component(dependencies = arrayOf(ActivityComponent::class),
         modules = arrayOf(CartModule::class))
 interface CartComponent {
+    fun inject(fragment: CartFragment)
 }
