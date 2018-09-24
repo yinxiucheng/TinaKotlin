@@ -4,15 +4,20 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
+import com.eightbitlab.rxbus.Bus
+import com.eightbitlab.rxbus.registerInBus
 import com.kennyc.view.MultiStateView
 import com.tina.base.ext.startLoading
 import com.tina.base.ui.activity.BaseMvpActivity
 import com.tina.base.ui.adapter.BaseRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_goods.*
+import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
 import org.jetbrains.anko.startActivity
 import tina.com.goods.R
 import tina.com.goods.common.GoodsConstant
 import tina.com.goods.data.protocol.Goods
+import tina.com.goods.event.AddCartEvent
+import tina.com.goods.event.SkuChangedEvent
 import tina.com.goods.injection.component.DaggerGoodsComponent
 import tina.com.goods.injection.module.GoodsModule
 import tina.com.goods.presenter.GoodsListPresenter
@@ -94,6 +99,7 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGAR
                 .goodsModule(GoodsModule()).build().inject(this)
         mPresenter.mView = this
     }
+
 
 
     override fun onBGARefreshLayoutBeginLoadingMore(refreshLayout: BGARefreshLayout?): Boolean {

@@ -3,13 +3,18 @@ package com.tina.mall.ui.activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
+import com.eightbitlab.rxbus.Bus
+import com.eightbitlab.rxbus.registerInBus
 import com.tina.base.common.AppManager
 import com.tina.base.ui.activity.BaseActivity
+import com.tina.base.utils.AppPrefsUtils
 import com.tina.mall.R
 import com.tina.mall.ui.fragment.HomeFragment
 import com.tina.mall.ui.fragment.MeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
+import tina.com.goods.common.GoodsConstant
+import tina.com.goods.event.UpdateCartEvent
 import tina.com.goods.ui.fragment.CategoryFragment
 import java.util.*
 
@@ -39,6 +44,8 @@ class MainActivity : BaseActivity() {
         initFragment()
         initBottomNav()
         changeFragment(0)
+        initObserve()
+        loadCartSize()
     }
 
     /*
@@ -91,7 +98,30 @@ class MainActivity : BaseActivity() {
         manager.commit()
     }
 
+    /*
+        初始化监听，购物车数量变化及消息标签是否显示
+     */
+    private fun initObserve(){
+        Bus.observe<UpdateCartEvent>()
+                .subscribe {
+                    loadCartSize()
+                }.registerInBus(this)
 
+//        Bus.observe<MessageBadgeEvent>()
+//                .subscribe {
+//                    t: MessageBadgeEvent ->
+//                    run {
+//                        mBottomNavBar.checkMsgBadge(t.isVisible)
+//                    }
+//                }.registerInBus(this)
+    }
+
+    /*
+       加载购物车数量
+    */
+    private fun loadCartSize(){
+        mBottomNavBar.checkCartBadge(AppPrefsUtils.getInt(GoodsConstant.SP_CART_SIZE))
+    }
 
     /*
         重写Back事件，双击退出

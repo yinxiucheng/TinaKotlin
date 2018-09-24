@@ -25,6 +25,7 @@ import tina.com.goods.data.protocol.Goods
 import tina.com.goods.event.AddCartEvent
 import tina.com.goods.event.GoodsDetailImageEvent
 import tina.com.goods.event.SkuChangedEvent
+import tina.com.goods.event.UpdateCartEvent
 import tina.com.goods.injection.component.DaggerGoodsComponent
 import tina.com.goods.injection.module.GoodsModule
 import tina.com.goods.presenter.GoodsDetailPresenter
@@ -178,6 +179,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     }
 
     override fun onAddCartResult(result: Int) {
+        Bus.send(UpdateCartEvent())
         toast("Cart ---------- $result")
     }
 
