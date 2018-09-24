@@ -24,7 +24,7 @@ import org.jetbrains.anko.support.v4.toast
 import tina.com.goods.R
 import tina.com.goods.common.GoodsConstant
 import tina.com.goods.data.protocol.CartGoods
-import tina.com.goods.event.UpdateCartEvent
+import tina.com.goods.event.UpdateCartSizeEvent
 import tina.com.goods.injection.component.DaggerCartComponent
 import tina.com.goods.injection.module.CartModule
 import tina.com.goods.presenter.CartListPresenter
@@ -152,7 +152,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
         //本地存储并发送事件刷新UI
         AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE,result?.size?:0)
-        Bus.send(UpdateCartEvent())
+        Bus.send(UpdateCartSizeEvent())
         //更新总价
         updateTotalPrice()
     }

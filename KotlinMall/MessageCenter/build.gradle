@@ -30,7 +30,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
 
-    compile project(':Provider')
+    api project(':Provider')
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 }

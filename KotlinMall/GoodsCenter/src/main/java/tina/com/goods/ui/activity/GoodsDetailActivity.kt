@@ -10,10 +10,12 @@ import com.tina.base.ui.activity.BaseActivity
 import com.tina.base.utils.AppPrefsUtils
 import com.tina.provider.common.afterLogin
 import kotlinx.android.synthetic.main.activity_goods_detail.*
+import org.jetbrains.anko.startActivity
 import q.rorbin.badgeview.QBadgeView
 import tina.com.goods.R
 import tina.com.goods.common.GoodsConstant
 import tina.com.goods.event.AddCartEvent
+import tina.com.goods.event.UpdateCartSizeEvent
 import tina.com.goods.ui.adapter.GoodsDetailVpAdapter
 
 /**
@@ -23,6 +25,7 @@ import tina.com.goods.ui.adapter.GoodsDetailVpAdapter
 class GoodsDetailActivity : BaseActivity() {
 
     private lateinit var mCartBdage: QBadgeView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_goods_detail)
@@ -45,6 +48,14 @@ class GoodsDetailActivity : BaseActivity() {
             }
         }
 
+        mEnterCartTv.onClick {
+            startActivity<CartActivity>()
+        }
+
+        mLeftIv.onClick {
+            finish()
+        }
+
         mCartBdage = QBadgeView(this)
     }
 
@@ -52,8 +63,7 @@ class GoodsDetailActivity : BaseActivity() {
       监听SKU变化及加入购物车事件
    */
     private fun initObserve() {
-
-        Bus.observe<AddCartEvent>()
+        Bus.observe<UpdateCartSizeEvent>()
                 .subscribe {
                     setCartBadge()
                 }.registerInBus(this)

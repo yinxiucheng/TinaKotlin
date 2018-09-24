@@ -14,7 +14,7 @@ import com.tina.mall.ui.fragment.MeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 import tina.com.goods.common.GoodsConstant
-import tina.com.goods.event.UpdateCartEvent
+import tina.com.goods.event.UpdateCartSizeEvent
 import tina.com.goods.ui.fragment.CartFragment
 import tina.com.goods.ui.fragment.CategoryFragment
 import java.util.*
@@ -103,7 +103,7 @@ class MainActivity : BaseActivity() {
         初始化监听，购物车数量变化及消息标签是否显示
      */
     private fun initObserve(){
-        Bus.observe<UpdateCartEvent>()
+        Bus.observe<UpdateCartSizeEvent>()
                 .subscribe {
                     loadCartSize()
                 }.registerInBus(this)

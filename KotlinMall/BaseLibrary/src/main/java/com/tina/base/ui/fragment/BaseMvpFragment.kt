@@ -71,7 +71,7 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
     /*
         错误信息提示，默认实现
      */
-    override fun onError(text:String) {
-        toast(text)
+    override fun onError(string:String) {
+        toast(string)
     }
 }

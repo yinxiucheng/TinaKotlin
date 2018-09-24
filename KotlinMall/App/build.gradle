@@ -36,4 +36,5 @@ dependencies {
     implementation project(':MessageCenter')
     implementation project(':UserCenter')
     implementation project(':GoodsCenter')
+    implementation project(':OrderCenter')
 }
