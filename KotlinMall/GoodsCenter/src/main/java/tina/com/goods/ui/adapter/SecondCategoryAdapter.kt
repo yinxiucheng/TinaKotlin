@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.tina.base.ext.loadUrl
 import com.tina.base.ui.adapter.BaseRecyclerViewAdapter
 import kotlinx.android.synthetic.main.layout_second_category_item.view.*
-import kotlinx.android.synthetic.main.layout_top_category_item.view.*
 import tina.com.goods.R
 import tina.com.goods.data.protocol.Category
 

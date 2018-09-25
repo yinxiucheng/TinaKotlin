@@ -9,5 +9,5 @@ import com.tina.order.data.protocol.Order
  */
 interface OrderConfirView : BaseView {
 
-    fun onGetOrder(order: Order)
+    fun onGetOrderByIdResult(order: Order)
 }

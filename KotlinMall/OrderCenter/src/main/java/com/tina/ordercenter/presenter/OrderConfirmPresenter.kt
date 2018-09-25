@@ -26,8 +26,12 @@ class OrderConfirmPresenter @Inject constructor() : BasePresenter<OrderConfirVie
         orderService.getOrderById(orderId)
                 .execute(object : BaseSubscribler<Order>(mView) {
                     override fun onNext(t: Order) {
-                        mView.onGetOrder(t)
+                        mView.onGetOrderByIdResult(t)
                     }
                 }, lifecycleProvider)
+    }
+
+    fun submitOrder(order: Order){
+
     }
 }

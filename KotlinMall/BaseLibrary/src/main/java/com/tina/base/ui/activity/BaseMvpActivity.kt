@@ -1,6 +1,7 @@
 package com.tina.base.ui.activity
 
 import android.os.Bundle
+import com.alibaba.android.arouter.launcher.ARouter
 import com.tina.base.common.BaseApplication
 import com.tina.base.injection.component.ActivityComponent
 import com.tina.base.injection.component.DaggerActivityComponent
@@ -44,6 +45,8 @@ abstract class BaseMvpActivity<T:BasePresenter<*>>: BaseActivity(), BaseView {
         injectComponent()
 
         mLoadingDialog = ProgressLoading.create(this)
+
+        ARouter.getInstance().inject(this)
     }
 
     /*
