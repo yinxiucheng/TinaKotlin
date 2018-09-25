@@ -3,6 +3,8 @@ package com.kotlin.order.injection.component
 import com.kotlin.order.injection.module.ShipAddressModule
 import com.tina.base.injection.PerComponentScope
 import com.tina.base.injection.component.ActivityComponent
+import com.tina.ordercenter.ui.activity.ShipAddressActivity
+import com.tina.ordercenter.ui.activity.ShipAddressEditActivity
 import dagger.Component
 
 /*
@@ -11,6 +13,6 @@ import dagger.Component
 @PerComponentScope
 @Component(dependencies = arrayOf(ActivityComponent::class),modules = arrayOf(ShipAddressModule::class))
 interface ShipAddressComponent {
-//    fun inject(activity: ShipAddressEditActivity)
-//    fun inject(activity: ShipAddressActivity)
+    fun inject(activity: ShipAddressEditActivity)
+    fun inject(activity: ShipAddressActivity)
 }
