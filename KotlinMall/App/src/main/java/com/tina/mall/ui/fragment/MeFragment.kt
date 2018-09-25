@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.kotlin.order.common.OrderConstant
+import com.kotlin.order.common.OrderStatus
 import com.tina.base.ext.loadUrl
 import com.tina.base.ext.onClick
 import com.tina.base.ui.fragment.BaseFragment
 import com.tina.base.utils.AppPrefsUtils
 import com.tina.mall.R
 import com.tina.mall.ui.activity.SettingActivity
+import com.tina.ordercenter.ui.activity.OrderActivity
+import com.tina.ordercenter.ui.activity.ShipAddressActivity
 import com.tina.provider.common.ProviderConstant
 import com.tina.provider.common.afterLogin
 import com.tina.provider.common.isLogined
@@ -91,26 +95,26 @@ class MeFragment : BaseFragment(), View.OnClickListener {
                 }
             }
 
-//            R.id.mWaitPayOrderTv -> {
-//                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
-//            }
-//            R.id.mWaitConfirmOrderTv -> {
-//                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
-//            }
-//            R.id.mCompleteOrderTv -> {
-//                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
-//            }
-//            R.id.mAllOrderTv -> {
-//                afterLogin {
-//                    startActivity<OrderActivity>()
-//                }
-//            }
-//
-//            R.id.mAddressTv -> {
-//                afterLogin {
-//                    startActivity<ShipAddressActivity>()
-//                }
-//            }
+            R.id.mWaitPayOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
+            }
+            R.id.mWaitConfirmOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
+            }
+            R.id.mCompleteOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
+            }
+            R.id.mAllOrderTv -> {
+                afterLogin {
+                    startActivity<OrderActivity>()
+                }
+            }
+
+            R.id.mAddressTv -> {
+                afterLogin {
+                    startActivity<ShipAddressActivity>()
+                }
+            }
 //            R.id.mShareTv -> {
 //                toast(R.string.coming_soon_tip)
 //            }

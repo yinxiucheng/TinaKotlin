@@ -10,4 +10,7 @@ import com.tina.order.data.protocol.Order
 interface OrderConfirView : BaseView {
 
     fun onGetOrderByIdResult(order: Order)
+
+    //提交订单回调
+    fun onSubmitOrderResult(result:Boolean)
 }

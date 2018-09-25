@@ -13,7 +13,7 @@
                 android:paddingBottom="@dimen/common_padding_small"
                 android:text="自营"
                 android:textColor="@color/text_light_dark"
-                android:drawableLeft="@drawable/icon_shop"
+                android:drawableLeft="@mipmap/icon_shop"
                 android:drawablePadding="@dimen/common_padding_small"/>
         <TextView
                 android:id="@+id/mOrderStatusNameTv"

@@ -23,6 +23,7 @@ import com.tina.provider.common.ProviderConstant
 import com.tina.provider.router.RouterPath
 import kotlinx.android.synthetic.main.activity_order_confirm.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 /**
  * @author yxc
@@ -93,7 +94,6 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(), OrderConf
         加载订单数据
      */
     private fun loadData() {
-//        mOrderId = intent.getIntExtra(ProviderConstant.KEY_ORDER_ID, -1)
         mPresenter.getOrderById(mOrderId)
     }
 
@@ -129,6 +129,18 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(), OrderConf
                 .orderModule(OrderModule()).build().inject(this)
 
         mPresenter.mView = this
+    }
+
+    /*
+        提交订单回调
+     */
+    override fun onSubmitOrderResult(result: Boolean) {
+        toast("订单提交成功")
+        ARouter.getInstance().build(RouterPath.PaySDK.PATH_PAY)
+                .withInt(ProviderConstant.KEY_ORDER_ID,mCurrentOrder!!.id)
+                .withLong(ProviderConstant.KEY_ORDER_PRICE,mCurrentOrder!!.totalPrice)
+                .navigation()
+        finish()
     }
 
 }
